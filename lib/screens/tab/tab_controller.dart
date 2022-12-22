@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/NewsResponse.dart';
-import 'package:news_app/screens/new_item.dart';
-import 'package:news_app/screens/tab_item.dart';
+import 'package:news_app/screens/news/news_item.dart';
+import 'package:news_app/screens/tab/tab_item.dart';
 import 'package:news_app/shared/network/remotely/api_manager.dart';
 
-import '../models/SourcesResponse.dart';
+import '../../models/SourcesResponse.dart';
+import '../../models/category.dart';
 
 class TabControllerScreen extends StatefulWidget {
   List<Sources> sources;
@@ -41,7 +42,8 @@ class _TabControllerScreenState extends State<TabControllerScreen> {
                 .toList(),
           ),
           FutureBuilder<NewsResponse>(
-              future: ApiManager.getNews(widget.sources[selectedIndex].id!),
+              future: ApiManager.getNews(
+                  widget.sources[selectedIndex].id!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -75,10 +77,9 @@ class _TabControllerScreenState extends State<TabControllerScreen> {
                 var news = snapshot.data?.articles ?? [];
                 return Expanded(
                   child: ListView.builder(
-                      itemCount: news.length,
-                      itemBuilder: (context, index) =>
-                          NewsItem(news[index]),
-                ),
+                    itemCount: news.length,
+                    itemBuilder: (context, index) => NewsItem(news[index]),
+                  ),
                 );
               })
         ],

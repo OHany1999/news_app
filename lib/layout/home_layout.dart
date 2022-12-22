@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/screens/drawer/drawer_widget.dart';
 import 'package:news_app/screens/home_screen.dart';
 import 'package:news_app/shared/network/remotely/api_manager.dart';
 import '../models/SourcesResponse.dart';
+import '../models/category.dart';
 
 class HomeLayout extends StatelessWidget {
   static const String routeName = 'home';
 
+
   @override
   Widget build(BuildContext context) {
+    CategoryModel args = ModalRoute.of(context)!.settings.arguments as CategoryModel;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -34,7 +39,8 @@ class HomeLayout extends StatelessWidget {
             backgroundColor: Colors.green,
           ),
         ),
-        body: HomeScreen(),
+        drawer: DrawerWidget(),
+        body: HomeScreen(args),
       ),
     );
   }

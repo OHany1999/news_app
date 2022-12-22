@@ -10,9 +10,10 @@ import '../../../models/NewsResponse.dart';
 class ApiManager{
 
 
-  static Future<SourcesResponse> getSources()async{
+  static Future<SourcesResponse> getSources(String categoryId)async{
     Uri URl=Uri.https(BASE,'/v2/top-headlines/sources',{
-      "apiKey": APIKEY
+      "apiKey": APIKEY,
+      'category':categoryId
     });
     Response sources = await http.get(URl);
     try{
@@ -30,7 +31,7 @@ class ApiManager{
   static Future<NewsResponse> getNews(String sourceId)async{
     Uri url = Uri.https(BASE, 'v2/everything',{
       'apiKey' : APIKEY,
-      'sources' : sourceId
+      'sources' : sourceId,
     });
 
     Response newsData = await http.get(url);

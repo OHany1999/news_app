@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/screens/tab_controller.dart';
+import 'package:news_app/screens/tab/tab_controller.dart';
 
 import '../models/SourcesResponse.dart';
+import '../models/category.dart';
 import '../shared/network/remotely/api_manager.dart';
 
 class HomeScreen extends StatelessWidget {
+  CategoryModel categoryModel;
+  HomeScreen(this.categoryModel);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SourcesResponse>(
-        future: ApiManager.getSources(),
+        future: ApiManager.getSources(categoryModel.id),
         builder: (context,snapshot){
           if(snapshot.connectionState == ConnectionState.waiting){
             return Center(child: CircularProgressIndicator());
