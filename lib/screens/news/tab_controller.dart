@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/NewsResponse.dart';
-import 'package:news_app/screens/news/news_item.dart';
-import 'package:news_app/screens/tab/tab_item.dart';
+import 'package:news_app/screens/news/tabs&news%20items/news_item.dart';
+import 'package:news_app/screens/news/tabs&news%20items/tab_item.dart';
 import 'package:news_app/shared/network/remotely/api_manager.dart';
 
 import '../../models/SourcesResponse.dart';

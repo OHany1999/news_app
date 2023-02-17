@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/screens/categories/categories_screen.dart';
 import 'package:news_app/screens/drawer/drawer_widget.dart';
-import 'package:news_app/screens/home_screen.dart';
-import 'package:news_app/shared/network/remotely/api_manager.dart';
-import '../models/SourcesResponse.dart';
+import 'package:news_app/screens/news/news_screen.dart';
 import '../models/category.dart';
 
-class HomeLayout extends StatelessWidget {
+class HomeLayout extends StatefulWidget {
   static const String routeName = 'home';
 
+  @override
+  State<HomeLayout> createState() => _HomeLayoutState();
+}
 
+class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
-    CategoryModel args = ModalRoute.of(context)!.settings.arguments as CategoryModel;
 
     return Container(
       decoration: BoxDecoration(
@@ -39,9 +41,15 @@ class HomeLayout extends StatelessWidget {
             backgroundColor: Colors.green,
           ),
         ),
-        drawer: DrawerWidget(),
-        body: HomeScreen(args),
+        body: currentSelectedItem == null? CategoriesScreen(returnFunction): NewsScreen(currentSelectedItem!),
       ),
     );
+  }
+
+  CategoryModel? currentSelectedItem = null;
+
+  void returnFunction(CategoryModel category){
+    currentSelectedItem = category;
+    setState(() {});
   }
 }

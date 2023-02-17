@@ -7,65 +7,43 @@ import '../drawer/drawer_widget.dart';
 
 class CategoriesScreen extends StatelessWidget {
   static const String RouteName = 'category';
+
+  Function callback;
+  CategoriesScreen(this.callback);
+
   @override
   Widget build(BuildContext context) {
-
-    List<CategoryModel> list = CategoryModel.getCategories();
-
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('assets/images/pattern.png'),
+    List<CategoryModel> category = CategoryModel.getCategories();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Pick your category \n of interest',
+          style: TextStyle(
+              color: Color.fromRGBO(112, 112, 112, 1.0),
+              fontSize: 23,
+              fontWeight: FontWeight.bold),
         ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70),
-          child: AppBar(
-            elevation: 0,
-            shape: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.green),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
-              ),
+        SizedBox(
+          height: 20.0,
+        ),
+        Expanded(
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
             ),
-            title: Text('News'),
-            centerTitle: true,
-            backgroundColor: Colors.green,
+            itemCount: category.length,
+            itemBuilder: (context, index) => InkWell(
+              onTap: (){
+                callback(category[index]);
+              },
+                child: CategoryItem(category[index],index),
+            ),
           ),
         ),
-        drawer: DrawerWidget(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Pick your category \n of interest',
-              style: TextStyle(
-                  color: Color.fromRGBO(112, 112, 112, 1.0),
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                ),
-                itemCount: list.length,
-                itemBuilder: (context, index) => CategoryItem(list[index],index),
-              ),
-            ),
-          ],
-        ),
-      ),
+      ],
     );
   }
 }

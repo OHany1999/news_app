@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/screens/tab/tab_controller.dart';
+import 'package:news_app/screens/news/tab_controller.dart';
 
-import '../models/SourcesResponse.dart';
-import '../models/category.dart';
-import '../shared/network/remotely/api_manager.dart';
+import '../../models/SourcesResponse.dart';
+import '../../models/category.dart';
+import '../../shared/network/remotely/api_manager.dart';
 
-class HomeScreen extends StatelessWidget {
+class NewsScreen extends StatelessWidget {
   CategoryModel categoryModel;
-  HomeScreen(this.categoryModel);
-
+  NewsScreen(this.categoryModel);
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SourcesResponse>(
@@ -37,7 +36,9 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           }
+
           var sourcesList= snapshot.data!.sources??[];
+
           return TabControllerScreen(sourcesList);
 
         }
