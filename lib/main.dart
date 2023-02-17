@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/layout/home_layout.dart';
+import 'package:news_app/screens/categories/categories_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: HomeLayout.routeName,
       routes: {
-        HomeLayout.routeName:(context)=>HomeLayout(),
+        HomeLayout.routeName:(context)=>HomeLayout()
+
       },
 
     );
